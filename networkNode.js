@@ -5,19 +5,6 @@ var Blockchain = require('./blockchain')
 var request = require('request');
 var fetch = require('node-fetch');
 
-// var Schema = mongoose.Schema;
-// const block = require('./model/block')
-
-// const newblock = block.create({
-
-	
-
-// }).then(data=>{
-// 	console.log(data);
-// }).catch(err=>{
-// 	if(err)throw err
-// })
-
 var nodePort = process.argv[2]
 console.log(nodePort)
 
@@ -277,7 +264,6 @@ app.get('/address/:name',(req,res)=>{
 // 	})
 // 	res.json(me)
 // })
-
 
 
 

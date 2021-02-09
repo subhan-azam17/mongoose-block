@@ -1,23 +1,6 @@
 var sha256 = require('sha256')
 var uuid = require('uuid');
-const url = process.argv[3]
-
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
-const mblock = require('./model/block')
-
-// const newblock = block.create({
-	
-	
-
-// }).then(data=>{
-// 	console.log(data);
-// }).catch(err=>{
-// 	if(err)throw err
-// })
-
-
-
+var url = process.argv[3]
 
 function Blockchain(){
 	this.chain = [];
@@ -37,21 +20,13 @@ Blockchain.prototype.generateGenesis = function(){
 		'hash':'0',
 		'nonce':'100'
 	}
-	 this.chain.push(block)
-	mblock.create({
-		height:block.height,
-		timestamp:block.timestamp,
-		transactions:block.transactions,
-		previoushash:block.previoushash,
-		hash:block.hash,
-		nonce:block.nonce
-	})
+	this.chain.push(block)
 	this.memPool = [];
 	console.log('Genesis Block Created ')
 	return block;	
 }
 
-Blockchain.prototype.createNewBlock = async function() {
+Blockchain.prototype.createNewBlock = function() {
 	if(this.chain.length == 0){
 		previousHash = null
 	}else{
@@ -67,17 +42,7 @@ Blockchain.prototype.createNewBlock = async function() {
 		'hash':hash,
 		'nonce':nonce
 	}
-	 this.chain.push(block)
-	mblock.create({
-		height:block.height,
-		timestamp:block.timestamp,
-		transactions:block.transactions,
-		previoushash:block.previoushash,
-		hash:block.hash,
-		nonce:block.nonce
-	}).then(data=>{
-		console.log(data)
-	}).catch(err=>{console.log(err)})
+	this.chain.push(block)
 	this.memPool = [];
 	console.log('New Block Added with block height '+block.height)
 	return block;
@@ -153,7 +118,4 @@ Blockchain.prototype.chainIsValid = function(blockchain){
 	}
 	return validChain
 }
-
-
-
 module.exports = Blockchain;
